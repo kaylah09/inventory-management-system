@@ -15,29 +15,20 @@ Team Member Role Responsibilities Kaylah Hammond Product Owner / GitHub Reposito
 
 # 2. Set Up the MySQL Database
 
-- Each team member will need to set up their own local MySQL database.
+Each team member must configure their local MySQL database before running the application.
 
 - Start WAMPServer and open phpMyAdmin.
 
-- Locate the database-setup.sql file in the main project folder.
+- Create an empty database named "inventorydb".
 
-- Copy the SQL code from the file.
+- Do not manually create any tables.
 
-- In phpMyAdmin, navigate to the server-level SQL tab.
-
-- Paste the SQL code and click Go.
-
-- The script will create the following:
-
-    - Database: inventorydb
-
-    - Table: inventory_item
-
-The database will initially be empty. Inventory items can be added through the application.
-
+The application is configured to automatically create and update database tables using Hibernate. This is enabled in the application.properties file
 # 3. Configure Database Credentials
 
 Each team member must configure their own MySQL credentials in IntelliJ.
+
+- Open the project in IntelliJ IDEA.
 
 - Navigate to Run → Edit Configurations.
 
@@ -47,7 +38,7 @@ Each team member must configure their own MySQL credentials in IntelliJ.
 
 - Find the Environment variables section.(May need to go to modify options to find setting)
 
-- Add the following variables: REPLACE "USERNAME" & "PW"  WITH YOUR OWN USERNAME AND PASSWORD
+- Add the following variables: Add the environment variables shown below. Replace "USERNAME" and "PW" with your own MySQL account username and password.
   ![img_2.png](img_2.png)
 - Click "OK"
 
@@ -66,13 +57,12 @@ The shared login is intended for local classroom testing only.
 # 5. Run the Application
 
 - Make sure WAMPServer and MySQL are running.
-
-- Open InventoryAppApplication.java in IntelliJ.
-
+- Make sure the `inventorydb` database has been created and your environment variables have been configured.
 - Run the Spring Boot application.
-
+- Refresh phpMyAdmin to verify that the database tables have been automatically created.
 - Open http://localhost:8080/Inventory/list in your browser.
-
 - Enter the shared application login credentials.
 
 Once logged in, you should be able to access the Inventory Directory.
+
+**Note:** Each team member has their own local database. Database structures will be generated from the project's entity classes, but individual database records are not shared between team members.

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+
 @Controller
 @RequestMapping("/Inventory")
 public class InventoryItemController {
@@ -27,12 +30,19 @@ public class InventoryItemController {
         theModel.addAttribute("inventoryItems", theInventoryItems);
         return "list-inventory";
     }
+
     @PostMapping("/save")
-    public String saveInventoryItem(@ModelAttribute("inventoryItem") InventoryItem theInventoryItem){
+    public String saveInventoryItem(
+            @Valid @ModelAttribute("inventoryItem") InventoryItem theInventoryItem,
+            BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "inventory-form";   // redisplay the form instead of saving bad data
+        }
         inventoryItemService.save(theInventoryItem);
         return "redirect:/Inventory/list";
-
     }
+    
     @GetMapping("/viewAddForm")
     public String viewAddForm (Model theModel){
         InventoryItem theInventoryItem = new InventoryItem();

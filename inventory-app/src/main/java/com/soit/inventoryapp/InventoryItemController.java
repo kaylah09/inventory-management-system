@@ -53,7 +53,7 @@ public class InventoryItemController {
 
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam("theInventoryItemId") int theId){
         inventoryItemService.deleteById(theId);
         return "redirect:/Inventory/list";

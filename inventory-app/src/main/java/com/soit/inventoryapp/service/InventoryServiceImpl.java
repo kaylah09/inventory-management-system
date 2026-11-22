@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class InventoryServiceImpl implements InventoryItemService {
 
-    private InventoryItemRepository inventoryItemRepository;
+    private final InventoryItemRepository inventoryItemRepository;
 @Autowired
     public InventoryServiceImpl (InventoryItemRepository theInventoryItemRepository){
         inventoryItemRepository = theInventoryItemRepository;
@@ -24,7 +24,9 @@ public class InventoryServiceImpl implements InventoryItemService {
 
     @Override
     public InventoryItem findById(int theId) {
-        return inventoryItemRepository.findById(theId).get();
+        return inventoryItemRepository.findById(theId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Inventory item not found with ID: " + theId));
     }
 
     @Override

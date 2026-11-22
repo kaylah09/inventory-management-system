@@ -12,7 +12,7 @@ import java.util.List;
 public class InventoryItemController {
 
     //This gives the InventoryItem Controller access to the InventoryItem service
-    public InventoryItemService inventoryItemService;
+    private final InventoryItemService inventoryItemService;
 
     public InventoryItemController(InventoryItemService theInventoryItemService) {
         inventoryItemService = theInventoryItemService;
@@ -53,7 +53,7 @@ public class InventoryItemController {
 
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam("theInventoryItemId") int theId){
         inventoryItemService.deleteById(theId);
         return "redirect:/Inventory/list";

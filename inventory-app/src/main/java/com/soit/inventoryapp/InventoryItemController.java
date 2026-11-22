@@ -12,7 +12,7 @@ import java.util.List;
 public class InventoryItemController {
 
     //This gives the InventoryItem Controller access to the InventoryItem service
-    public InventoryItemService inventoryItemService;
+    private final InventoryItemService inventoryItemService;
 
     public InventoryItemController(InventoryItemService theInventoryItemService) {
         inventoryItemService = theInventoryItemService;

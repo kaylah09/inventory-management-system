@@ -1,5 +1,8 @@
 package com.soit.inventoryapp.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="inventory_item")
@@ -10,15 +13,20 @@ public class InventoryItem {
     @Column(name="id")
     private int id;
 
+    @NotBlank(message = "Item name is required")
     @Column(name = "name")
     private String name;
 
+    @NotBlank(message = "Choose a category")
     @Column(name = "category")
     private String category;
 
+    @Min(value = 0, message = "Quantity cannot be negative")
+    @Max(value = 1000, message = "Quantity cannot exceed 1000")
     @Column(name = "quantity")
     private int quantity;
 
+    @NotBlank(message = "Choose a status")
     @Column(name = "status")
     private String status;
 

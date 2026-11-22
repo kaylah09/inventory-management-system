@@ -43,9 +43,11 @@
                 <a th:href="@{/Inventory/viewUpdateForm(inventoryItemId=${theInventory.id})}"
                    class="btn btn-primary btn-sm">Update
                 </a>
-                <a th:href="@{/Inventory/delete(theInventoryItemId=${theInventory.id})}"
-                   class="btn btn-danger btn-sm" onclick="if(!(confirm('To confirm deletion, please click ok; otherwise click cancel'))) return false">Delete
-                </a>
+                <form th:action="@{/Inventory/delete}" method="post" style="display:inline">
+                    <input type="hidden" name="theInventoryItemId" th:value="${theInventory.id}" />
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Are you sure you want to delete this inventory item?')">Delete</button>
+                </form>
 
             </td>
         </tr>

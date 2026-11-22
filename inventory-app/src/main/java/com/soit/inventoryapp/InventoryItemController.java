@@ -4,6 +4,8 @@ import com.soit.inventoryapp.entity.InventoryItem;
 import com.soit.inventoryapp.service.InventoryItemService;
 
 import org.springframework.stereotype.Controller;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -28,7 +30,11 @@ public class InventoryItemController {
         return "list-inventory";
     }
     @PostMapping("/save")
-    public String saveInventoryItem(@ModelAttribute("inventoryItem") InventoryItem theInventoryItem){
+    public String saveInventoryItem(@Valid @ModelAttribute("inventoryItem") InventoryItem theInventoryItem,
+                                    BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "inventory-form";
+        }
         inventoryItemService.save(theInventoryItem);
         return "redirect:/Inventory/list";
 
